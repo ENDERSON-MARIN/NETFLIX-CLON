@@ -6,9 +6,8 @@ import Profile from "./pages/Profile";
 import Paypal from "./pages/Paypal";
 import Home from "./pages/Home";
 
-
 function App() {
-  const user = "ico";
+  const user = null;
   const classes = useStyles();
 
   return (
