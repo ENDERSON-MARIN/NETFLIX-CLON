@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, makeStyles, Typography } from "@material-ui/core";
+import { makeStyles, Typography } from "@material-ui/core";
 import logo from "../images/netflix-logo.png";
 import imageLogin from "../images/netflix-login.png";
 import { NetflixButton, NetflixInput } from "../styled/styledComponents";
