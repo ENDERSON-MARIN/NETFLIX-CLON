@@ -8,7 +8,7 @@ import Home from "./pages/Home";
 
 
 function App() {
-  const user = "ico";
+  const user = null;
   const classes = useStyles();
 
   return (
@@ -37,7 +37,7 @@ function App() {
 const useStyles = makeStyles((theme) => ({
   root: {
     minHeight: "100vh",
-    backgroundColor: "#111",
+    // backgroundColor: "#111",
   },
 }));
 
