@@ -1,17 +1,48 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button, makeStyles, Typography } from "@material-ui/core";
 import heroBanner from "../images/casa_de_papel.jpeg";
+import axios from "axios";
+import requests from "../request";
 
 const Banner = () => {
   const classes = useStyles();
+  const [movie, setMovie] = useState([]);
 
   const truncate = (string, n) =>
     string?.length > n ? `${string.substring(0, n - 1)} ...` : string;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const request = await axios.get(requests.fetchNetflixOriginals);
+      /* tenemos un array de peliculas en request.data.results */
+      /* generamos un numero random entre 0 y la longitud del array, para obtener un indice aleatorio */
+      const random = Math.floor(
+        Math.random() * request.data.results.length - 1
+      );
+      /* mostramos en pantalla request.data.results[random] */
+      setMovie(request.data.results[random]);
+      return request;
+    };
+    fetchData();
+  }, []);
+
+  console.log(movie);
   return (
-    <div className={classes.root}>
+    <div
+      className={classes.root}
+      style={{
+        backgroundImage: `url("https://image.tmdb.org/t/p/original/${movie?.backdrop_path}")`,
+        position: "relative",
+        height: "440px",
+        objectFit: "contain",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        color: "#fff",
+      }}
+    >
       <div className={classes.content}>
         <Typography variant="h2" component="h1">
-          Movie Title
+          {movie?.title || movie?.name || movie?.original_name}
         </Typography>
         <div className={classes.buttons}>
           <Button>Play</Button>
@@ -22,10 +53,7 @@ const Banner = () => {
           variant="h6"
           className={classes.description}
         >
-          {truncate(
-            "Movie Description Movie Description Movie Description Movie Description Movie Description Movie Description Movie Description Movie Description Movie Description Movie Description Movie Description Movie Description Movie Description Movie Description Movie Description Movie Description Movie Description Movie Description Movie Description Movie Description Movie Description Movie Description Movie Description Movie Description Movie Description Movie Description Movie Description Movie Description Movie Description Movie Description Movie Description Movie Description Movie Description Movie Description Movie Description Movie Description Movie Description Movie Description ",
-            160
-          )}
+          {truncate(movie?.overview, 160)}
         </Typography>
         <div className={classes.fadeEfect}></div>
       </div>
@@ -34,14 +62,12 @@ const Banner = () => {
 };
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    backgroundImage: `url(${heroBanner})`,
-    position: "relative",
-    height: "500px",
-    objectFit: "contain",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    color: "#fff",
+  root: {},
+  content: {
+    paddingTop: "50px",
+    maxWidth: "500px",
+    paddingLeft: "30px",
+    textAlign:"justify"
   },
   buttons: {
     "& button": {

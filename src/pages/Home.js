@@ -18,9 +18,9 @@ function Home() {
       />
       <Rows title="TOP RATED" fetchUrl={requests.fetchTopRated} />
       <Rows title="ACTION MOVIES" fetchUrl={requests.fetchActionsMovies} />
-      <Rows title="COMEDY MOVIES" fetchUrl={requests.fetchComedyMovies} />
       <Rows title="HORROR MOVIES" fetchUrl={requests.fetchHorrorMovies} />
       <Rows title="ROMANCE MOVIES" fetchUrl={requests.fetchRomanceMovies} />
+      <Rows title="COMEDY MOVIES" fetchUrl={requests.fetchComedyMovies} />
       <Rows title="DOCUMENTARIES" fetchUrl={requests.fetchDocumentaries} />
     </div>
   );

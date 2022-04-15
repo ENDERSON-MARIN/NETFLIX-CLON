@@ -27,9 +27,9 @@ const Profile = () => {
             <Typography variant="h5" gutterBottom className={classes.planText}>
               Plans
             </Typography>
-            <Plans price={7.99}>Netflix Standard</Plans>
-            <Plans price={11.99}>Netflix Basic</Plans>
-            <Plans price={15.99} wide="medium" color="gray">
+            <Plans cost={7.99}>Netflix Standard</Plans>
+            <Plans cost={11.99}>Netflix Basic</Plans>
+            <Plans cost={15.99} wide="medium" color="gray">
               Netflix Premium
             </Plans>
             <NetflixButton radius="true" wide="fullWidth" onClick={signOut}>
