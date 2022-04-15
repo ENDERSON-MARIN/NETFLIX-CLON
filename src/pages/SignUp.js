@@ -2,25 +2,28 @@ import React, { useState } from "react";
 import { makeStyles, Typography } from "@material-ui/core";
 import { NetflixButton, NetflixInput } from "../styled/styledComponents";
 import { auth } from "../firebase";
+import { useHistory } from "react-router-dom";
 
 const SignUp = () => {
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const history = useHistory();
 
   const register = (e) => {
     e.preventDefault();
     auth
       .createUserWithEmailAndPassword(email, password)
-      .then((authUser) => console.log(authUser))
+      .then((authUser) => history.push("/"))
       .catch((error) => alert(error.message));
   };
 
   const signIn = (e) => {
     e.preventDefault();
-    auth.signInWithEmailAndPassword(email, password)
-    .then((authUser) => console.log(authUser))
-    .catch((error) => alert(error.message))
+    auth
+      .signInWithEmailAndPassword(email, password)
+      .then((authUser) => history.push("/"))
+      .catch((error) => alert(error.message));
   };
   return (
     <div className={classes.root}>
