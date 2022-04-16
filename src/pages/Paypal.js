@@ -1,21 +1,20 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core";
+import { useSelector } from "react-redux";
+import { selectPrice } from "../features/priceSlice";
+import PaypalCheckoutButton from "./PaypalCheckoutButton";
 
 const Paypal = () => {
-  const classes = useStyles();
+  const price = useSelector(selectPrice);
+
+  const product = {
+    description: "Netflix Subscription",
+    price: price,
+  };
 
   return (
-    <div>
-      <h1>Paypal</h1>
+    <div className="paypal-button-container">
+      <PaypalCheckoutButton product={product} />
     </div>
   );
 };
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-
-  },
-}));
-
 export default Paypal;
-

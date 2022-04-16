@@ -13,7 +13,7 @@ const Profile = () => {
 
   const signOut = () => {
     auth.signOut();
-    history.push("/login")
+    history.push("/login");
   };
   return (
     <div className={classes.root}>
@@ -23,14 +23,14 @@ const Profile = () => {
         <img src={avatar} alt="Avatar Netflix" />
         <div className={classes.details}>
           <div className={classes.plans}>
-            <Typography variant="h6">Email usuario</Typography>
+            <Typography variant="h6">{auth.currentUser.email}</Typography>
             <Typography variant="h5" gutterBottom className={classes.planText}>
               Plans
             </Typography>
-            <Plans cost={7.99}>Netflix Standard</Plans>
-            <Plans cost={11.99}>Netflix Basic</Plans>
-            <Plans cost={15.99} wide="medium" color="gray">
-              Netflix Premium
+            <Plans cost={7.99}>Netflix Standard (7.99$)</Plans>
+            <Plans cost={11.99}>Netflix Basic (11.99$)</Plans>
+            <Plans cost={15.99} color="gray">
+              Netflix Premium (15.99$)
             </Plans>
             <NetflixButton radius="true" wide="fullWidth" onClick={signOut}>
               Sign Out

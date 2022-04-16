@@ -3,6 +3,7 @@ import { makeStyles, Typography } from "@material-ui/core";
 import { NetflixButton, NetflixInput } from "../styled/styledComponents";
 import { auth } from "../firebase";
 import { useHistory } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
   const classes = useStyles();
@@ -14,8 +15,30 @@ const SignUp = () => {
     e.preventDefault();
     auth
       .createUserWithEmailAndPassword(email, password)
-      .then((authUser) => history.push("/"))
-      .catch((error) => alert(error.message));
+      .then(
+        (authUser) =>
+          Swal.fire({
+            title: "Registrado!",
+            text: "Usuario realizado exitosamente!",
+            icon: "success",
+            confirmButtonText: "Ok",
+            confirmButtonColor: "green",
+            timer: "3000",
+          }),
+        history.push("/")
+      )
+      .catch(
+        (error) =>
+          Swal.fire({
+            title: "Error!",
+            text: error.message,
+            icon: "error",
+            confirmButtonText: "Ok",
+            confirmButtonColor: "#d33",
+            timer: "3000",
+          }),
+        history.push("/login")
+      );
   };
 
   const signIn = (e) => {
@@ -23,7 +46,16 @@ const SignUp = () => {
     auth
       .signInWithEmailAndPassword(email, password)
       .then((authUser) => history.push("/"))
-      .catch((error) => alert(error.message));
+      .catch((error) =>
+        Swal.fire({
+          title: "Error!",
+          text: error.message,
+          icon: "error",
+          confirmButtonText: "Ok",
+          confirmButtonColor: "#d33",
+          timer: "3000",
+        })
+      );
   };
   return (
     <div className={classes.root}>

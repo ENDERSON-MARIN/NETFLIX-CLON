@@ -21,3 +21,10 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+#Package
+package.json
+package.lock.json
+
+#Firebase
+firebase.js

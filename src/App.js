@@ -8,6 +8,7 @@ import Paypal from "./pages/Paypal";
 import Home from "./pages/Home";
 import { auth } from "./firebase";
 import { login, logout, selectUser } from "./features/userSlice";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 function App() {
   const user = useSelector(selectUser);
@@ -31,24 +32,31 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div className={classes.root}>
-      <Router>
-        <Switch>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/profile">
-            <Profile />
-          </Route>
-          <Route path="/checkout">
-            <Paypal />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
-      </Router>
-    </div>
+    <PayPalScriptProvider
+      options={{
+        "client-id":
+          "ATT97KgPyVWVP5IBmJSO4C5G3pvDeyVrqCHaF--R6ezcKSpvxe-TmPDebTl8VyjESXzOcd1oclq690j9",
+      }}
+    >
+      <div className={classes.root}>
+        <Router>
+          <Switch>
+            <Route path="/login">
+              <Login />
+            </Route>
+            <Route path="/profile">
+              <Profile />
+            </Route>
+            <Route path="/checkout">
+              <Paypal />
+            </Route>
+            <Route path="/">
+              <Home />
+            </Route>
+          </Switch>
+        </Router>
+      </div>
+    </PayPalScriptProvider>
   );
 }
 
