@@ -1,7 +1,9 @@
 import axios from "axios";
 
+const BASEURL = process.env.REACT_APP_BASE_URL;
+
 const instance = axios.create({
-  baseURL: "https://api.themoviedb.org/3",
+  baseURL: BASEURL,
 });
 
 export default instance;

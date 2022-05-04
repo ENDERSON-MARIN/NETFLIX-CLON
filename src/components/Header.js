@@ -8,8 +8,11 @@ import {
 } from "@material-ui/core";
 import logo from "../images/netflix-logo.png";
 import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectUser } from "../features/userSlice";
 
 const Header = () => {
+  const user = useSelector(selectUser);
   const classes = useStyles();
   const [show, setShow] = useState(false);
   const history = useHistory();
@@ -36,11 +39,18 @@ const Header = () => {
         <IconButton onClick={() => history.push("/")}>
           <img src={logo} alt="logo netflix" className={classes.logo} />
         </IconButton>
-        <Avatar
-          variant="square"
-          style={{ cursor: "pointer" }}
-          onClick={() => history.push("/profile")}
-        />
+        {user ? (
+          <Avatar
+            variant="square"
+            style={{ cursor: "pointer" }}
+            onClick={() => history.push("/profile")}
+          />
+        ) : (
+          <Avatar
+            style={{ cursor: "pointer" }}
+            onClick={() => history.push("/")}
+          />
+        )}
       </Toolbar>
     </AppBar>
   );

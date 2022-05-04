@@ -25,7 +25,7 @@ const SignUp = () => {
             confirmButtonColor: "green",
             timer: "3000",
           }),
-        history.push("/")
+        history.push("/login")
       )
       .catch(
         (error) =>

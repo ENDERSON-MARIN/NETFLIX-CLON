@@ -76,7 +76,7 @@ const PaypalCheckoutButton = (props) => {
       }}
       onApprove={async (data, actions) => {
         const order = await actions.order.capture();
-        console.log("order", order);
+        // console.log("order", order);
 
         handleApprove(data.orderID);
       }}

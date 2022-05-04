@@ -26,7 +26,7 @@ const Banner = () => {
     fetchData();
   }, []);
 
-  console.log(movie);
+  //console.log(movie);
   return (
     <div
       className={classes.root}

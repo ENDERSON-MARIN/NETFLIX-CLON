@@ -9,11 +9,14 @@ import Home from "./pages/Home";
 import { auth } from "./firebase";
 import { login, logout, selectUser } from "./features/userSlice";
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+import { Redirect } from "react-router-dom";
 
 function App() {
   const user = useSelector(selectUser);
   const classes = useStyles();
   const dispatch = useDispatch();
+
+  const PAYPAL_CLIENT_ID = process.env.REACT_APP_PAYPAL_CLIENT_ID;
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((userAuth) => {
@@ -34,25 +37,41 @@ function App() {
   return (
     <PayPalScriptProvider
       options={{
-        "client-id":
-          "ATT97KgPyVWVP5IBmJSO4C5G3pvDeyVrqCHaF--R6ezcKSpvxe-TmPDebTl8VyjESXzOcd1oclq690j9",
+        "client-id": PAYPAL_CLIENT_ID,
       }}
     >
       <div className={classes.root}>
         <Router>
           <Switch>
-            <Route path="/login">
-              <Login />
-            </Route>
-            <Route path="/profile">
-              <Profile />
-            </Route>
-            <Route path="/checkout">
-              <Paypal />
-            </Route>
-            <Route path="/">
-              <Home />
-            </Route>
+            <Route
+              exact
+              path="/login"
+              render={() => {
+                return user ? <Redirect to="/" /> : <Login />;
+              }}
+            />
+            <Route
+              exact
+              path="/profile"
+              render={() => {
+                return user ? <Profile /> : <Login />;
+              }}
+            />
+            <Route
+              exact
+              path="/checkout"
+              render={() => {
+                return user ? <Paypal /> : <Login />;
+              }}
+            />
+
+            <Route
+              exact
+              path="/"
+              render={() => {
+                return user ? <Home /> : <Login />;
+              }}
+            />
           </Switch>
         </Router>
       </div>
